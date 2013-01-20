@@ -1,0 +1,6 @@
+(defproject SICP "1.0"
+  :description "SICP solutions in Clojure"
+  :url "https://github.com/SamirTalwar/SICP-Solutions"
+  :license {:name "MIT License"
+            :url "http:/opensource.org/licenses/MIT"}
+  :dependencies [[org.clojure/clojure "1.4.0"]])
