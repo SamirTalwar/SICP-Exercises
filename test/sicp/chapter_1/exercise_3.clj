@@ -9,6 +9,6 @@
         true (+ (square b) (square c))))
 
 (deftest exercise-3
-         (is (= (sum-of-squares-of-larger-two 3 4 5) 41))
-         (is (= (sum-of-squares-of-larger-two 7 6 2) 85))
-         (is (= (sum-of-squares-of-larger-two 9 4 5) 106)))
+         (is (= 41 (sum-of-squares-of-larger-two 3 4 5)))
+         (is (= 85 (sum-of-squares-of-larger-two 7 6 2)))
+         (is (= 106 (sum-of-squares-of-larger-two 9 4 5))))
