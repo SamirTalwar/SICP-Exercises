@@ -1,7 +1,7 @@
-(ns sicp.chapter-1.exercise-1
+(ns sicp.chapter-1-1.exercise-01
   (:use clojure.test))
 
-(deftest exercise-1
+(deftest exercise-01
          (is (= 10 10))
          (is (= 12 (+ 5 3 4)))
          (is (= 8 (- 9 1)))

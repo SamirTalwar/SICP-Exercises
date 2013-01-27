@@ -1,4 +1,4 @@
-(ns sicp.chapter-1.exercise-7
+(ns sicp.chapter-1-1.exercise-07
   (:use clojure.test))
 
 (defn average [x y]
@@ -24,7 +24,7 @@
 (defn almost-equal [a b]
   (< (Math/abs (- a b)) 0.001))
 
-(deftest exercise-7
+(deftest exercise-07
          (is (almost-equal 3.0 (sqrt 9)))
          (is (almost-equal 11.7047 (sqrt (+ 100 37))))
          (is (almost-equal 1.7738 (sqrt (+ (sqrt 2) (sqrt 3)))))
