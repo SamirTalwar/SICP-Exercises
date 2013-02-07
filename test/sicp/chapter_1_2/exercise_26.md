@@ -1,0 +1,1 @@
+Louis is evaluating `expmod` twice for each recursive step that involves squaring. This means that instead of being a operation with a single path, it is exponential, building a binary tree of operations that must all be evaluated. As the original algorithm is ϴ(log n), and (log n)^n == n, the new algorithm is ϴ(n).
