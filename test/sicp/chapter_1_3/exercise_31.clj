@@ -1,10 +1,19 @@
 (ns sicp.chapter-1-3.exercise-31
   (:use clojure.test))
 
-(defn product [term a next-value b]
+(defn product-recursive [term a next-value b]
   (if (> a b)
     1
-    (* (term a) (product term (next-value a) next-value b))))
+    (* (term a) (product-recursive term (next-value a) next-value b))))
+
+(defn product-iterative [term a next-value b]
+  (defn iter [a result]
+    (if (> a b)
+      result
+      (iter (next-value a) (* result (term a)))))
+  (iter a 1))
+
+(def product product-iterative)
 
 (defn factorial [n]
   (product identity 1 inc n))
