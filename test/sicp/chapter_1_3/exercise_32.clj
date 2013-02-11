@@ -1,10 +1,19 @@
 (ns sicp.chapter-1-3.exercise-32
   (:use clojure.test))
 
-(defn accumulate [combiner null-value term a next-value b]
+(defn accumulate-recursive [combiner null-value term a next-value b]
   (if (> a b)
     null-value
-    (combiner (term a) (accumulate combiner null-value term (next-value a) next-value b))))
+    (combiner (term a) (accumulate-recursive combiner null-value term (next-value a) next-value b))))
+
+(defn accumulate-iterative [combiner null-value term a next-value b]
+  (defn iter [a result]
+    (if (> a b)
+      result
+      (iter (next-value a) (combiner result (term a)))))
+  (iter a null-value))
+
+(def accumulate accumulate-iterative)
 
 (defn sum [term a next-value b]
   (accumulate + 0 term a next-value b))
@@ -43,4 +52,4 @@
          (is (approximately? Math/PI (* 8 (pi-sum 1 1000))))
 
          (is (= 3628800 (factorial 10)))
-         (is (approximately? Math/PI (* 4 (pi-product 1000)))) )
+         (is (approximately? Math/PI (* 4 (pi-product 1000)))))
