@@ -2,8 +2,8 @@
   (:use clojure.test)
   (:require [clojure.contrib.math :as math]))
 
-(def tolerance 0.00001)
 (defn approximately? [v1 v2]
+  (def tolerance 0.00001)
   (< (math/abs (- v1 v2)) tolerance))
 
 (defn fixed-point [f first-guess]
