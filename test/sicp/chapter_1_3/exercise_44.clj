@@ -28,16 +28,12 @@
 (def flattened-square-wave
   (smooth-n square-wave 5 0.5))
 
-(defn approximately? [v1 v2]
-  (def tolerance 0.00001)
-  (< (math/abs (- v1 v2)) tolerance))
-
 (deftest exercise-44
-         (is (= 1 (square-wave 1.5)))
-         (is (approximately? 2/3 (smoothened-square-wave 1.5)))
-         (is (= 0 (square-wave 2.25)))
-         (is (approximately? 1/3 (smoothened-square-wave 2.25)))
-         (is (= -1 (square-wave 3.75)))
-         (is (approximately? -2/3 (smoothened-square-wave 3.75)))
+         (is (= 1 (square-wave 3/2))) ; 3/2 = 1.5
+         (is (= 2/3 (smoothened-square-wave 3/2)))
+         (is (= 0 (square-wave 9/4))) ; 9/4 = 2.25
+         (is (= 1/3 (smoothened-square-wave 9/4)))
+         (is (= -1 (square-wave 15/4))) ; 15/4 = 3.75
+         (is (= -2/3 (smoothened-square-wave 15/4)))
          (is (= 1 (square-wave 1)))
          (is (> 0.3 (flattened-square-wave 1))))

@@ -1,6 +1,7 @@
 (ns sicp.chapter-1-3.exercise-37
   (:use clojure.test)
-  (:require [clojure.contrib.math :as math]))
+  (:require [clojure.contrib.math :as math]
+            [sicp.comparisons :refer [approximately?]]))
 
 (defn cont-frac-recursive [n d k]
   (defn recurse [i]
@@ -16,10 +17,6 @@
         current-value
         (recur (fn [i] (+ (d i) current-value)) (- k 1)))))
   (iter d k))
-
-(defn approximately? [v1 v2]
-  (def tolerance 0.0001)
-  (< (math/abs (- v1 v2)) tolerance))
 
 (def golden-ratio (/ (+ 1 (math/sqrt 5)) 2))
 

@@ -1,11 +1,8 @@
 (ns sicp.chapter-1-3.exercise-45
   (:use clojure.test)
   (:require [clojure.contrib.math :as math]
+            [sicp.comparisons :refer [approximately?]]
             [clojure.math.numeric-tower :as numeric-tower]))
-
-(defn approximately? [v1 v2]
-  (def tolerance 0.00001)
-  (< (math/abs (- v1 v2)) tolerance))
 
 (defn fixed-point-builder [strategy]
   (fn [f first-guess]

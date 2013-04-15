@@ -1,6 +1,6 @@
 (ns sicp.chapter-1-3.exercise-31
   (:use clojure.test)
-  (:require [clojure.contrib.math :as math]))
+  (:require [sicp.comparisons :refer [approximately-within?]]))
 
 (defn product-recursive [term a next-value b]
   (if (> a b)
@@ -25,8 +25,7 @@
        (+ n (- 1 (rem n 2)))))
   (product pi-approximation 2 inc n))
 
-(defn approximately? [a b]
-  (< (math/abs (- a b)) 0.01))
+(def approximately? (approximately-within? 0.01))
 
 (deftest exercise-31
          (is (= 3628800 (factorial 10)))

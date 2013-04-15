@@ -1,6 +1,7 @@
 (ns sicp.chapter-1-1.exercise-08
   (:use clojure.test)
-  (:require [clojure.contrib.math :as math]))
+  (:require [sicp.comparisons :refer [approximately-within?]]
+            [clojure.contrib.math :as math]))
 
 (defn average [x y]
   (/ (+ x y) 2))
@@ -22,13 +23,12 @@
 
 (defn cube [x] (* x x x))
 
-(defn almost-equal [a b]
-  (< (math/abs (- a b)) 0.001))
+(def approximately? (approximately-within? 0.001))
 
 (deftest exercise-08
-         (is (almost-equal 3.0 (cbrt 27.0)))
-         (is (almost-equal 11.447142 (cbrt 1500.0)))
-         (is (almost-equal 1.392850 (cbrt (+ (cbrt 2) (cbrt 3)))))
-         (is (almost-equal 1000.0 (cube (cbrt 1000.0))))
-         (is (almost-equal 0.001 (cbrt 0.000000001)))
-         (is (almost-equal 2097152.0 (cbrt Long/MAX_VALUE))))
+         (is (approximately? 3.0 (cbrt 27.0)))
+         (is (approximately? 11.447142 (cbrt 1500.0)))
+         (is (approximately? 1.392850 (cbrt (+ (cbrt 2) (cbrt 3)))))
+         (is (approximately? 1000.0 (cube (cbrt 1000.0))))
+         (is (approximately? 0.001 (cbrt 0.000000001)))
+         (is (approximately? 2097152.0 (cbrt Long/MAX_VALUE))))
