@@ -7,7 +7,7 @@
   (defn recurse [i]
     (if (> i k)
       0
-      (/ (n i) (+ (d i) (recurse (+ i 1))))))
+      (/ (n i) (+ (d i) (recurse (inc i))))))
   (recurse 1))
 
 (defn cont-frac-iterative [n d k]
@@ -15,10 +15,10 @@
     (let [current-value (/ (n k) (denom k))]
       (if (= k 1)
         current-value
-        (recur (fn [i] (+ (d i) current-value)) (- k 1)))))
+        (recur (fn [i] (+ (d i) current-value)) (dec k)))))
   (iter d k))
 
-(def golden-ratio (/ (+ 1 (math/sqrt 5)) 2))
+(def golden-ratio (/ (inc (math/sqrt 5)) 2))
 
 (deftest exercise-37
          (is (approximately? (/ 1 golden-ratio) (cont-frac-recursive (fn [i] 1)

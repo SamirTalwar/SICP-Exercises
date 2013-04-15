@@ -22,7 +22,7 @@
                           (+ (* b p) (* a q))
                           p
                           q
-                          (- count 1))))
+                          (dec count))))
   (fib-iter 1 0 0 1 n))
 
 (deftest exercise-19

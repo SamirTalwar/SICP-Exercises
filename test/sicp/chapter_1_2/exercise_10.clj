@@ -5,7 +5,7 @@
   (cond (= y 0) 0
         (= x 0) (* 2 y)
         (= y 1) 2
-        :else (A (- x 1) (A x (- y 1)))))
+        :else (A (dec x) (A x (dec y)))))
 
 (defn f [n] (A 0 n))
 (defn g [n] (A 1 n))
@@ -16,15 +16,14 @@
   (defn pow-iter [i n]
     (if (= n 0)
       i
-      (pow-iter (* i a) (- n 1))))
+      (pow-iter (* i a) (dec n))))
   (pow-iter 1 n))
 
 (defn tetrate [a n]
   (defn tetr-iter [i n]
     (if (= n 0)
       i
-      (tetr-iter (pow a i) (- n 1)))
-    )
+      (tetr-iter (pow a i) (dec n))))
   (tetr-iter 1 n))
 
 (deftest exercise-10

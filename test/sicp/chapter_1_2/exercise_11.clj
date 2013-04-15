@@ -10,7 +10,7 @@
   (defn f [a b c count]
     (if (= count 0)
       a
-      (f b c (+ (* 3 a) (* 2 b) c) (- count 1))))
+      (f b c (+ (* 3 a) (* 2 b) c) (dec count))))
   (f 0 1 2 n))
 
 (deftest exercise-11

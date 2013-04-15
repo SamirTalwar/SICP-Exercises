@@ -8,7 +8,7 @@
     (cond (= n 0) 0
           (= n 1) (+ a b)
           (even? n) (multiply-iter a (double-value b) (halve n))
-          :else (multiply-iter (+ b a) b (- n 1))))
+          :else (multiply-iter (+ b a) b (dec n))))
   (multiply-iter 0 b n))
 
 (deftest exercise-18

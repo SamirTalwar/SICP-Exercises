@@ -5,7 +5,7 @@
 (defn average [& values]
   (defn average-
     ([n value] (/ value n))
-    ([n one two & tail] (apply average- (+ n 1) (+ one two) tail)))
+    ([n one two & tail] (apply average- (inc n) (+ one two) tail)))
   (apply average- 1 values))
 
 (defrecord Point [x y])

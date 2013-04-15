@@ -7,7 +7,7 @@
   (= n (smallest-divisor n)))
 
 (defn search-for-primes [min count]
-  (take count (filter prime? (iterate #(+ % 1) min))))
+  (take count (filter prime? (iterate inc min))))
 
 (defn timed-prime-test [n]
   (print "Start value: ")

@@ -7,7 +7,7 @@
   (defn find-divisor [n test-divisor]
     (cond (> (* test-divisor test-divisor) n) n
           (divides? test-divisor n) test-divisor
-          :else (find-divisor n (+ test-divisor 1))))
+          :else (find-divisor n (inc test-divisor))))
   (find-divisor n 2))
 
 (defn prime? [n]
@@ -28,7 +28,7 @@
   (filtered-accumulate prime? + 0 (fn [n] (* n n)) a inc b))
 
 (defn product-of-smaller-coprimes [n]
-  (filtered-accumulate (partial coprime? n) * 1 identity 1 inc (- n 1)))
+  (filtered-accumulate (partial coprime? n) * 1 identity 1 inc (dec n)))
 
 (deftest exercise-33
          (is (= 499269 (sum-of-squares-of-primes 100 200)))

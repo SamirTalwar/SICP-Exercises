@@ -8,7 +8,7 @@
     (let [current-value (/ (n k) (denom k))]
       (if (= k 1)
         current-value
-        (recur (fn [i] (+ (d i) current-value)) (- k 1)))))
+        (recur (fn [i] (+ (d i) current-value)) (dec k)))))
   (iter d k))
 
 (deftest exercise-38

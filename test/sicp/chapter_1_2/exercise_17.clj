@@ -6,7 +6,7 @@
   (defn halve [x] (/ x 2))
   (cond (= n 0) 0
         (even? n) (double-value (multiply b (halve n)))
-        :else (+ b (multiply b (- n 1)))))
+        :else (+ b (multiply b (dec n)))))
 
 (deftest exercise-17
          (is (= 1 (multiply 1 1)))

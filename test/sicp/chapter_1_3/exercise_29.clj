@@ -11,7 +11,7 @@
     (concat [1] (take (dec n) (apply concat (repeat [4 2]))) [1]))
 
   (* (/ h 3)
-     (->> (range (+ n 1))
+     (->> (range (inc n))
           (map y)
           (map list coefficients)
           (map (fn [[coefficient value]] (* coefficient value)))

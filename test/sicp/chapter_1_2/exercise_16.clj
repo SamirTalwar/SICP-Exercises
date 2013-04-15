@@ -7,7 +7,7 @@
     (cond (= n 0) 1
           (= n 1) (* a b)
           (even? n) (fast-expt-iter a (square b) (/ n 2))
-          :else (fast-expt-iter (* b a) b (- n 1))))
+          :else (fast-expt-iter (* b a) b (dec n))))
   (fast-expt-iter 1 b n))
 
 (deftest exercise-16
