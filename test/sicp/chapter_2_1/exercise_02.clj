@@ -12,8 +12,8 @@
 
 (defrecord Segment [start end] Line
   (midpoint [this]
-    (Point. (average (.x (.start this)) (.x (.end this)))
-            (average (.y (.start this)) (.y (.end this))))))
+    (Point. (average (.x start) (.x end))
+            (average (.y start) (.y end)))))
 
 (deftest exercise-02
          (is (= (Point. 1.5 2.0) (.midpoint (Segment. (Point. 0.0 0.0) (Point. 3.0 4.0)))))
