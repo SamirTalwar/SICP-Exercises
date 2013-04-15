@@ -8,13 +8,13 @@
   (def h (/ (- b a) n))
   (defn y [k] (f (+ a (* k h))))
   (def coefficients
-    (flatten (list [1] (take (- n 1) (flatten (repeat [4 2]))) [1])))
+    (concat [1] (take (dec n) (apply concat (repeat [4 2]))) [1]))
 
   (* (/ h 3)
      (->> (range (+ n 1))
           (map y)
           (map list coefficients)
-          (map (fn [part] (let [[coefficient value] part] (* coefficient value))))
+          (map (fn [[coefficient value]] (* coefficient value)))
           (apply +))))
 
 (deftest exercise-29
