@@ -1,12 +1,9 @@
 (ns sicp.chapter-2-1.exercise-02
-  (:use clojure.test)
-  (:require [clojure.contrib.math :as math]))
+  (:use clojure.test))
 
 (defn average [& values]
-  (defn average-
-    ([n value] (/ value n))
-    ([n one two & tail] (apply average- (inc n) (+ one two) tail)))
-  (apply average- 1 values))
+  (/ (apply + values)
+     (count values)))
 
 (defrecord Point [x y])
 
