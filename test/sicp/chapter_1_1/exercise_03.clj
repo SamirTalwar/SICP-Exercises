@@ -4,9 +4,9 @@
 (defn square [x] (* x x))
 
 (defn sum-of-squares-of-larger-two [a b c]
-  (cond (and (>= a b) (>= b c)) (+ (square a) (square b))
-        (and (>= a b) (>= c b)) (+ (square a) (square c))
-        true (+ (square b) (square c))))
+  (cond (>= a b c) (+ (square a) (square b))
+        (>= a c b) (+ (square a) (square c))
+        :else (+ (square b) (square c))))
 
 (deftest exercise-03
          (is (= 41 (sum-of-squares-of-larger-two 3 4 5)))
