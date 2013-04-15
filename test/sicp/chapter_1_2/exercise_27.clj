@@ -6,8 +6,11 @@
 
 (defn expmod [base exp m]
   (cond (= exp 0) 1
-        (even? exp) (rem (square (expmod base (/ exp 2) m)) m)
-        :else (rem (* base (expmod base (- exp 1) m)) m)))
+        (even? exp) (rem (square (expmod base (/ exp 2) m))
+                         m)
+        :else (rem (* base
+                      (expmod base (- exp 1) m))
+                   m)))
 
 (defn fermat-test [n test-value]
   (= (expmod test-value n n) test-value))
