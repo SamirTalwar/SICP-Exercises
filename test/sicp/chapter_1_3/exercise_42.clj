@@ -2,12 +2,12 @@
   (:use clojure.test))
 
 (defn compose [f g]
-  (fn [x] (f (g x))))
+  #(f (g %)))
 
 (defn square [x]
   (* x x))
 
 (deftest exercise-42
          (is (= 4 ((compose inc inc) 2)))
-         (is (= 7 ((compose (fn [x] (/ x 2)) (fn [x] (+ x 5))) 9)))
+         (is (= 7 ((compose #(/ % 2) #(+ % 5)) 9)))
          (is (= 49 ((compose square inc) 6))))

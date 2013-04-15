@@ -2,7 +2,7 @@
   (:use clojure.test))
 
 (defn compose [f g]
-  (fn [x] (f (g x))))
+  #(f (g %)))
 
 (defn repeated [f n]
   ((fn [func times]
