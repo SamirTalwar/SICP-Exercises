@@ -1,5 +1,6 @@
 (ns sicp.chapter-1-3.exercise-30
-  (:use clojure.test))
+  (:use clojure.test)
+  (:require [clojure.contrib.math :as math]))
 
 (defn sum [term a next-value b]
   (defn iter [a result]
@@ -22,7 +23,7 @@
   (sum pi-term a pi-next b))
 
 (defn approximately? [a b]
-  (< (Math/abs (- a b)) 0.01))
+  (< (math/abs (- a b)) 0.01))
 
 (deftest exercise-30
          (is (= 3025 (sum-cubes 1 10)))

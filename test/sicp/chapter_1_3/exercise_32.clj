@@ -1,5 +1,6 @@
 (ns sicp.chapter-1-3.exercise-32
-  (:use clojure.test))
+  (:use clojure.test)
+  (:require [clojure.contrib.math :as math]))
 
 (defn accumulate-recursive [combiner null-value term a next-value b]
   (if (> a b)
@@ -44,7 +45,7 @@
   (product pi-approximation 2 inc n))
 
 (defn approximately? [a b]
-  (< (Math/abs (- a b)) 0.01))
+  (< (math/abs (- a b)) 0.01))
 
 (deftest exercise-32
          (is (= 3025 (sum-cubes 1 10)))

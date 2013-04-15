@@ -1,5 +1,6 @@
 (ns sicp.chapter-1-3.exercise-29
-  (:use clojure.test))
+  (:use clojure.test)
+  (:require [clojure.contrib.math :as math]))
 
 (defn cube [n] (* n n n))
 
@@ -17,7 +18,7 @@
           (apply +))))
 
 (defn almost-equal? [a b]
-  (< (Math/abs (- a b)) 0.0001))
+  (< (math/abs (- a b)) 0.0001))
 
 (deftest exercise-29
          (is (almost-equal? 0.25 (integral cube 0 1 100)))

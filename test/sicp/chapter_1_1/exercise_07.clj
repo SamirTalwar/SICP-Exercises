@@ -1,5 +1,6 @@
 (ns sicp.chapter-1-1.exercise-07
-  (:use clojure.test))
+  (:use clojure.test)
+  (:require [clojure.contrib.math :as math]))
 
 (defn average [x y]
   (/ (+ x y) 2))
@@ -10,7 +11,7 @@
 (defn square [x] (* x x))
 
 (defn good-enough? [guess previous-guess]
-  (< (Math/abs (- guess previous-guess)) 0.001))
+  (< (math/abs (- guess previous-guess)) 0.001))
 
 (defn sqrt-iter [guess previous-guess x]
   (if (good-enough? guess previous-guess)
@@ -22,7 +23,7 @@
 
 
 (defn almost-equal [a b]
-  (< (Math/abs (- a b)) 0.001))
+  (< (math/abs (- a b)) 0.001))
 
 (deftest exercise-07
          (is (almost-equal 3.0 (sqrt 9)))

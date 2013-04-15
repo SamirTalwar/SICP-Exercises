@@ -1,5 +1,6 @@
 (ns sicp.chapter-1-1.exercise-08
-  (:use clojure.test))
+  (:use clojure.test)
+  (:require [clojure.contrib.math :as math]))
 
 (defn average [x y]
   (/ (+ x y) 2))
@@ -8,7 +9,7 @@
   (average guess (/ (+ (/ x (* guess guess)) (* 2 guess)) 3)))
 
 (defn good-enough? [guess previous-guess]
-  (< (Math/abs (- guess previous-guess)) 0.000001))
+  (< (math/abs (- guess previous-guess)) 0.000001))
 
 (defn cbrt-iter [guess previous-guess x]
   (if (good-enough? guess previous-guess)
@@ -22,7 +23,7 @@
 (defn cube [x] (* x x x))
 
 (defn almost-equal [a b]
-  (< (Math/abs (- a b)) 0.001))
+  (< (math/abs (- a b)) 0.001))
 
 (deftest exercise-08
          (is (almost-equal 3.0 (cbrt 27.0)))
