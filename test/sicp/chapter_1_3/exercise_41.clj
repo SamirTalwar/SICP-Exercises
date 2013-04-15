@@ -2,7 +2,7 @@
   (:use clojure.test))
 
 (defn double-fn [f]
-  (comp f f))
+  #(f (f %)))
 
 (defn square [x]
   (* x x))
