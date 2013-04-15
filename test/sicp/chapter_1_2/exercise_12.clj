@@ -5,8 +5,8 @@
   (cond (< column 1) 0
         (> column row) 0
         (= row 1) 1
-        :else (+ (pascal (- row 1) (- column 1)) (pascal (- row 1) column))
-        ))
+        :else (+ (pascal (- row 1) (- column 1))
+                 (pascal (- row 1) column))))
 
 (deftest exercise-12
          (is (= 1 (pascal 1 1)))
