@@ -17,7 +17,7 @@
   (fn [x]
     (f (f x))))
 
-(defn + [a b]
+(defn add [a b]
   ((a add-1) b))
 
 (defn to-number [numeral]
@@ -31,6 +31,6 @@
          (is (= 1 (to-number one)))
          (is (= 2 (to-number two)))
 
-         (is (= 0 (to-number (+ zero zero))))
-         (is (= 2 (to-number (+ one one))))
-         (is (= 7 (to-number (+ (add-1 (add-1 (add-1 zero))) (add-1 (add-1 (add-1 (add-1 zero)))))))))
+         (is (= 0 (to-number (add zero zero))))
+         (is (= 2 (to-number (add one one))))
+         (is (= 7 (to-number (add (add-1 (add-1 (add-1 zero))) (add-1 (add-1 (add-1 (add-1 zero)))))))))
