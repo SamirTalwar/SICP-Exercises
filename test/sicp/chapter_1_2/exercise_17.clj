@@ -2,11 +2,11 @@
   (:use clojure.test))
 
 (defn multiply [b n]
-  (defn double-value [x] (+ x x))
-  (defn halve [x] (/ x 2))
-  (cond (= n 0) 0
-        (even? n) (double-value (multiply b (halve n)))
-        :else (+ b (multiply b (dec n)))))
+  (letfn [(double-value [x] (+ x x))
+          (halve [x] (/ x 2))]
+    (cond (= n 0) 0
+      (even? n) (double-value (multiply b (halve n)))
+      :else (+ b (multiply b (dec n))))))
 
 (deftest exercise-17
          (is (= 1 (multiply 1 1)))

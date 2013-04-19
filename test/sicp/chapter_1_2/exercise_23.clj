@@ -3,17 +3,17 @@
   (:require [clojure.string :as string]))
 
 (defn smallest-divisor [n]
-  (defn next-possible [number]
-    (if (= number 2)
-      3
-      (+ number 2)))
-  (defn divides? [a b]
-    (= (rem b a) 0))
-  (defn find-divisor [n test-divisor]
-    (cond (> (* test-divisor test-divisor) n) n
-          (divides? test-divisor n) test-divisor
-          :else (find-divisor n (next-possible test-divisor))))
-  (find-divisor n 2))
+  (letfn [(next-possible [number]
+            (if (= number 2)
+              3
+              (+ number 2)))
+          (divides? [a b]
+            (= (rem b a) 0))
+          (find-divisor [n test-divisor]
+            (cond (> (* test-divisor test-divisor) n) n
+                  (divides? test-divisor n) test-divisor
+                  :else (find-divisor n (next-possible test-divisor))))]
+    (find-divisor n 2)))
 
 (defn prime? [n]
   (= n (smallest-divisor n)))

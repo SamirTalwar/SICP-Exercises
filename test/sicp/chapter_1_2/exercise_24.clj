@@ -10,9 +10,9 @@
         :else (rem (* base (expmod base (dec exp) m)) m)))
 
 (defn fermat-test [n]
-  (defn try-it [a]
-    (= (expmod a n n) a))
-  (try-it (+ 1 (rand-int (dec n)))))
+  (letfn [(try-it [a]
+            (= (expmod a n n) a))]
+    (try-it (+ 1 (rand-int (dec n))))))
 
 (defn fast-prime? [n times]
   (cond (= times 0) true

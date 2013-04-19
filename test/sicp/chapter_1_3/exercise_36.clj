@@ -5,13 +5,13 @@
 
 (defn fixed-point-builder [strategy]
   (fn [f first-guess]
-    (defn attempt [guess]
-      (println "Guess: " guess)
-      (let [next-guess (f guess)]
-        (if (approximately? guess next-guess)
-          next-guess
-          (recur (strategy guess next-guess)))))
-    (attempt first-guess)))
+    (letfn [(attempt [guess]
+              (println "Guess: " guess)
+              (let [next-guess (f guess)]
+                (if (approximately? guess next-guess)
+                  next-guess
+                  (recur (strategy guess next-guess)))))]
+      (attempt first-guess))))
 
 (def naive-fixed-point
   (fixed-point-builder (fn [guess next-guess] next-guess)))

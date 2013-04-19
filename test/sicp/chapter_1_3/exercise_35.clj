@@ -4,12 +4,12 @@
             [sicp.comparisons :refer [approximately?]]))
 
 (defn fixed-point [f first-guess]
-  (defn attempt [guess]
-    (let [next-guess (f guess)]
-      (if (approximately? guess next-guess)
-        next-guess
-        (recur next-guess))))
-  (attempt first-guess))
+  (letfn [(attempt [guess]
+            (let [next-guess (f guess)]
+              (if (approximately? guess next-guess)
+                next-guess
+                (recur next-guess))))]
+    (attempt first-guess)))
 
 (def golden-ratio (/ (+ 1 (math/sqrt 5)) 2))
 

@@ -3,11 +3,11 @@
   (:require [sicp.comparisons :refer [approximately-within?]]))
 
 (defn sum [term a next-value b]
-  (defn iter [a result]
-    (if (> a b)
-      result
-      (iter (next-value a) (+ result (term a)))))
-  (iter a 0))
+  (letfn [(iter [a result]
+            (if (> a b)
+              result
+              (iter (next-value a) (+ result (term a)))))]
+    (iter a 0)))
 
 (defn sum-cubes [a b]
   (sum (fn [n] (* n n n)) a inc b))
@@ -16,11 +16,9 @@
   (sum identity a inc b))
 
 (defn pi-sum [a b]
-  (defn pi-term [x]
-    (/ 1.0 (* x (+ x 2))))
-  (defn pi-next [x]
-    (+ x 4))
-  (sum pi-term a pi-next b))
+  (letfn [(pi-term [x] (/ 1.0 (* x (+ x 2))))
+          (pi-next [x] (+ x 4))]
+    (sum pi-term a pi-next b)))
 
 (def approximately? (approximately-within? 0.01))
 

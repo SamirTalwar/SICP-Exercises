@@ -7,13 +7,13 @@
   (area [this]))
 
 (defn rectangle [top right bottom left]
-  (def width (- right left))
-  (def height (- top bottom))
-  (reify Shape
-    (perimeter [this]
-      (+ width height width height))
-    (area [this]
-      (* width height))))
+  (let [width (- right left)
+        height (- top bottom)]
+    (reify Shape
+      (perimeter [this]
+        (+ width height width height))
+      (area [this]
+        (* width height)))))
 
 (deftest exercise-03
          (def rectangle-a (rectangle 10 10 5 5))

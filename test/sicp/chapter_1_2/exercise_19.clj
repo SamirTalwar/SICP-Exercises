@@ -10,20 +10,20 @@
 ; (p', q') = (p² + q², q² + 2pq)
 
 (defn fib [n]
-  (defn square [x] (* x x))
-  (defn fib-iter [a b p q count]
-    (cond (= count 0) b
-          (even? count) (fib-iter a
-                                  b
-                                  (+ (square p) (square q))
-                                  (+ (square q) (* 2 p q))
-                                  (/ count 2))
-          :else (fib-iter (+ (* b q) (* a q) (* a p))
-                          (+ (* b p) (* a q))
-                          p
-                          q
-                          (dec count))))
-  (fib-iter 1 0 0 1 n))
+  (letfn [(square [x] (* x x))
+          (fib-iter [a b p q count]
+            (cond (= count 0) b
+                  (even? count) (fib-iter a
+                                          b
+                                          (+ (square p) (square q))
+                                          (+ (square q) (* 2 p q))
+                                          (/ count 2))
+                  :else (fib-iter (+ (* b q) (* a q) (* a p))
+                                  (+ (* b p) (* a q))
+                                  p
+                                  q
+                                  (dec count))))]
+    (fib-iter 1 0 0 1 n)))
 
 (deftest exercise-19
          (is (= 1 (fib 1)))

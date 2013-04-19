@@ -4,12 +4,12 @@
             [sicp.comparisons :refer [approximately?]]))
 
 (defn cont-frac [n d k]
-  (defn iter [denom k]
-    (let [current-value (/ (n k) (denom k))]
-      (if (= k 1)
-        current-value
-        (recur (fn [i] (+ (d i) current-value)) (dec k)))))
-  (iter d k))
+  (letfn [(iter [denom k]
+            (let [current-value (/ (n k) (denom k))]
+              (if (= k 1)
+                current-value
+                (recur (fn [i] (+ (d i) current-value)) (dec k)))))]
+    (iter d k)))
 
 (deftest exercise-38
          (is (approximately? (- Math/E 2) (cont-frac (fn [i] 1)

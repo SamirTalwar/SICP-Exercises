@@ -3,21 +3,21 @@
   (:require [clojure.string :as string]))
 
 (defn expmod [base exp m]
-  (defn squared [n]
-    (let [result (* n n)]
-      (cond (= n 1) result
-            (= n (dec m)) result
-            (= (rem result m) 1) 0
-            :else result)))
-  (cond (= exp 0) 1
-        (even? exp)
-          (rem (squared (expmod base (/ exp 2) m)) m)
-        :else (rem (* base (expmod base (dec exp) m)) m)))
+  (letfn [(squared [n]
+            (let [result (* n n)]
+              (cond (= n 1) result
+                    (= n (dec m)) result
+                    (= (rem result m) 1) 0
+                    :else result)))]
+    (cond (= exp 0) 1
+      (even? exp)
+      (rem (squared (expmod base (/ exp 2) m)) m)
+      :else (rem (* base (expmod base (dec exp) m)) m))))
 
 (defn fermat-test [n]
-  (defn try-it [a]
-    (= (expmod a n n) a))
-  (try-it (inc (rand-int (dec n)))))
+  (letfn [(try-it [a]
+            (= (expmod a n n) a))]
+    (try-it (inc (rand-int (dec n))))))
 
 (defn fast-prime? [n times]
   (cond (= times 0) true

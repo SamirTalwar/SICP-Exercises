@@ -2,13 +2,13 @@
   (:use clojure.test))
 
 (defn fast-expt [b n]
-  (defn fast-expt-iter [a b n]
-    (defn square [x] (* x x))
-    (cond (= n 0) 1
-          (= n 1) (* a b)
-          (even? n) (fast-expt-iter a (square b) (/ n 2))
-          :else (fast-expt-iter (* b a) b (dec n))))
-  (fast-expt-iter 1 b n))
+  (letfn [(square [x] (* x x))
+          (fast-expt-iter [a b n]
+            (cond (= n 0) 1
+                  (= n 1) (* a b)
+                  (even? n) (fast-expt-iter a (square b) (/ n 2))
+                  :else (fast-expt-iter (* b a) b (dec n))))]
+    (fast-expt-iter 1 b n)))
 
 (deftest exercise-16
          (is (= 1 (fast-expt 1 1)))

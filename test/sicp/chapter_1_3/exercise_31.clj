@@ -8,11 +8,11 @@
     (* (term a) (product-recursive term (next-value a) next-value b))))
 
 (defn product-iterative [term a next-value b]
-  (defn iter [a result]
-    (if (> a b)
-      result
-      (iter (next-value a) (* result (term a)))))
-  (iter a 1))
+  (letfn [(iter [a result]
+            (if (> a b)
+              result
+              (iter (next-value a) (* result (term a)))))]
+    (iter a 1)))
 
 (def product product-iterative)
 
@@ -20,10 +20,10 @@
   (product identity 1 inc n))
 
 (defn pi-product [n]
-  (defn pi-approximation [^double n]
-    (/ (+ n (rem n 2))
-       (+ n (- 1 (rem n 2)))))
-  (product pi-approximation 2 inc n))
+  (letfn [(pi-approximation [^double n]
+            (/ (+ n (rem n 2))
+               (+ n (- 1 (rem n 2)))))]
+    (product pi-approximation 2 inc n)))
 
 (def approximately? (approximately-within? 0.01))
 

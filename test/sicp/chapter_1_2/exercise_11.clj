@@ -7,11 +7,11 @@
     (+ (f-recursive (- n 1)) (* 2 (f-recursive (- n 2))) (* 3 (f-recursive (- n 3))))))
 
 (defn f-iterative [n]
-  (defn f [a b c count]
-    (if (= count 0)
-      a
-      (f b c (+ (* 3 a) (* 2 b) c) (dec count))))
-  (f 0 1 2 n))
+  (letfn [(f [a b c count]
+            (if (= count 0)
+              a
+              (f b c (+ (* 3 a) (* 2 b) c) (dec count))))]
+    (f 0 1 2 n)))
 
 (deftest exercise-11
          (is (= 0 (f-recursive 0)))

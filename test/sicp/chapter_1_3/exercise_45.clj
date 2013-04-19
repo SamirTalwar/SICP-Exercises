@@ -6,15 +6,15 @@
 
 (defn fixed-point-builder [strategy]
   (fn [f first-guess]
-    (defn attempt [guess explosion-limit]
-      (if (= explosion-limit 0)
-        ; TODO: Use a better exception class than `java.lang.Exception`.
-        (throw (Exception. "Infinite recursion alert.")))
-      (let [next-guess (f guess)]
-        (if (approximately? guess next-guess)
-          next-guess
-          (recur (strategy guess next-guess) (dec explosion-limit)))))
-    (attempt first-guess 100)))
+    ((fn [guess explosion-limit]
+       (if (= explosion-limit 0)
+         ; TODO: Use a better exception class than `java.lang.Exception`.
+         (throw (Exception. "Infinite recursion alert.")))
+       (let [next-guess (f guess)]
+         (if (approximately? guess next-guess)
+           next-guess
+           (recur (strategy guess next-guess) (dec explosion-limit)))))
+     first-guess 100)))
 
 (defn repeated [f n]
   ((fn [func times]
@@ -29,11 +29,12 @@
   (fn [guess next-guess] ((repeated #(average-damp guess %) n) next-guess)))
 
 (defn nth-root [root value]
-  (defn iteration [y] (/ value (expt y (dec root))))
-  (def damp-count (int (/ (Math/log root) (Math/log 2))))
-  (if (> damp-count 1)
-    (is (thrown-with-msg? Exception #"Infinite recursion" ((fixed-point-builder (average-damp-n (dec damp-count))) iteration 1.0))))
-  ((fixed-point-builder (average-damp-n damp-count)) iteration 1.0))
+  (let [iteration (fn [y] (/ value (expt y (dec root))))
+        damp-count (int (/ (Math/log root) (Math/log 2)))]
+    (if (> damp-count 1)
+      (is (thrown-with-msg? Exception #"Infinite recursion"
+                            ((fixed-point-builder (average-damp-n (dec damp-count))) iteration 1.0))))
+    ((fixed-point-builder (average-damp-n damp-count)) iteration 1.0)))
 
 (deftest exercise-45
          (is (approximately? (expt 2 1/2) (nth-root 2 2)))

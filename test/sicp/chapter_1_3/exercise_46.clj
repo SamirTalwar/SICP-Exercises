@@ -4,20 +4,16 @@
             [sicp.comparisons :refer [approximately?]]))
 
 (defn iterative-improve [improve good-enough?]
-  (fn [first-guess]
-    (defn attempt [guess]
-      (let [next-guess (improve guess)]
-        (if (good-enough? guess next-guess)
-          next-guess
-          (recur next-guess))))
-    (attempt first-guess)))
+  (fn [guess]
+    (let [next-guess (improve guess)]
+      (if (good-enough? guess next-guess)
+        next-guess
+        (recur next-guess)))))
 
 (defn sqrt [x]
-  (defn average [x y]
-    (/ (+ x y) 2))
-  (defn improve [guess]
-    (average guess (/ x guess)))
-  ((iterative-improve improve approximately?) 1.0))
+  (letfn [(average [x y] (/ (+ x y) 2))
+          (improve [guess] (average guess (/ x guess)))]
+    ((iterative-improve improve approximately?) 1.0)))
 
 (defn fixed-point [f first-guess]
   ((iterative-improve f approximately?) first-guess))

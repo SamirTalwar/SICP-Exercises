@@ -13,18 +13,18 @@
 (defn k [n] (* 5 n n))
 
 (defn pow [a n]
-  (defn pow-iter [i n]
-    (if (= n 0)
-      i
-      (pow-iter (* i a) (dec n))))
-  (pow-iter 1 n))
+  (letfn [(pow-iter [i n]
+            (if (= n 0)
+              i
+              (pow-iter (* i a) (dec n))))]
+    (pow-iter 1 n)))
 
 (defn tetrate [a n]
-  (defn tetr-iter [i n]
-    (if (= n 0)
-      i
-      (tetr-iter (pow a i) (dec n))))
-  (tetr-iter 1 n))
+  (letfn [(tetr-iter [i n]
+            (if (= n 0)
+              i
+              (tetr-iter (pow a i) (dec n))))]
+    (tetr-iter 1 n)))
 
 (deftest exercise-10
          (is (= 1024 (A 1 10)))

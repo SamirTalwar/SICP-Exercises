@@ -2,13 +2,13 @@
   (:use clojure.test))
 
 (defn smallest-divisor [n]
-  (defn divides? [a b]
-    (= (rem b a) 0))
-  (defn find-divisor [n test-divisor]
-    (cond (> (* test-divisor test-divisor) n) n
-          (divides? test-divisor n) test-divisor
-          :else (find-divisor n (inc test-divisor))))
-  (find-divisor n 2))
+  (letfn [(divides? [a b]
+            (= (rem b a) 0))
+          (find-divisor [n test-divisor]
+            (cond (> (* test-divisor test-divisor) n) n
+                  (divides? test-divisor n) test-divisor
+                  :else (find-divisor n (inc test-divisor))))]
+    (find-divisor n 2)))
 
 (deftest exercise-21
          (is (= 199 (smallest-divisor 199)))

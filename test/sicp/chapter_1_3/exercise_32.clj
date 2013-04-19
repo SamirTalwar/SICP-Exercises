@@ -8,11 +8,11 @@
     (combiner (term a) (accumulate-recursive combiner null-value term (next-value a) next-value b))))
 
 (defn accumulate-iterative [combiner null-value term a next-value b]
-  (defn iter [a result]
-    (if (> a b)
-      result
-      (iter (next-value a) (combiner result (term a)))))
-  (iter a null-value))
+  (letfn [(iter [a result]
+            (if (> a b)
+              result
+              (iter (next-value a) (combiner result (term a)))))]
+    (iter a null-value)))
 
 (def accumulate accumulate-iterative)
 
@@ -29,20 +29,18 @@
   (sum identity a inc b))
 
 (defn pi-sum [a b]
-  (defn pi-term [x]
-    (/ 1.0 (* x (+ x 2))))
-  (defn pi-next [x]
-    (+ x 4))
-  (sum pi-term a pi-next b))
+  (letfn [(pi-term [x] (/ 1.0 (* x (+ x 2))))
+          (pi-next [x] (+ x 4))]
+    (sum pi-term a pi-next b)))
 
 (defn factorial [n]
   (product identity 1 inc n))
 
 (defn pi-product [n]
-  (defn pi-approximation [^double n]
-    (/ (+ n (rem n 2))
-       (+ n (- 1 (rem n 2)))))
-  (product pi-approximation 2 inc n))
+  (letfn [(pi-approximation [^double n]
+            (/ (+ n (rem n 2))
+               (+ n (- 1 (rem n 2)))))]
+    (product pi-approximation 2 inc n)))
 
 (def approximately? (approximately-within? 0.01))
 

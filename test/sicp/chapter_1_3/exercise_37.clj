@@ -4,19 +4,19 @@
             [sicp.comparisons :refer [approximately?]]))
 
 (defn cont-frac-recursive [n d k]
-  (defn recurse [i]
-    (if (> i k)
-      0
-      (/ (n i) (+ (d i) (recurse (inc i))))))
-  (recurse 1))
+  (letfn [(recurse [i]
+            (if (> i k)
+              0
+              (/ (n i) (+ (d i) (recurse (inc i))))))]
+    (recurse 1)))
 
 (defn cont-frac-iterative [n d k]
-  (defn iter [denom k]
-    (let [current-value (/ (n k) (denom k))]
-      (if (= k 1)
-        current-value
-        (recur (fn [i] (+ (d i) current-value)) (dec k)))))
-  (iter d k))
+  (letfn [(iter [denom k]
+            (let [current-value (/ (n k) (denom k))]
+              (if (= k 1)
+                current-value
+                (recur (fn [i] (+ (d i) current-value)) (dec k)))))]
+    (iter d k)))
 
 (def golden-ratio (/ (inc (math/sqrt 5)) 2))
 
