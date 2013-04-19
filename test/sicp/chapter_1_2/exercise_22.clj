@@ -20,10 +20,10 @@
       (println (- end start)))))
 
 (deftest exercise-22
-         (is (= '(1009 1013 1019) (search-for-primes 1001 3)))
-         (is (= '(10007 10009 10037) (search-for-primes 10001 3)))
-         (is (= '(100003 100019 100043) (search-for-primes 100001 3)))
-         (is (= '(1000003 1000033 1000037) (search-for-primes 1000001 3))))
+         (is (= [1009 1013 1019] (search-for-primes 1001 3)))
+         (is (= [10007 10009 10037] (search-for-primes 10001 3)))
+         (is (= [100003 100019 100043] (search-for-primes 100001 3)))
+         (is (= [1000003 1000033 1000037] (search-for-primes 1000001 3))))
 
 ; The growth in time seems to be consistent with the algorithm's growth of ϴ(√n).
 ;
