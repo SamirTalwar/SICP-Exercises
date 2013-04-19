@@ -3,6 +3,8 @@
   (:require [clojure.contrib.generic.arithmetic :as arithmetic]))
 
 (defprotocol Interval
+  (lower [this])
+  (upper [this])
   (width [this]))
 
 (defrecord NumericInterval [lower upper]
@@ -18,15 +20,15 @@
 
 (defmethod arithmetic/+ [Interval Interval]
   [x y]
-  (NumericInterval/create {:lower (arithmetic/+ (:lower x) (:lower y))
-                           :upper (arithmetic/+ (:upper x) (:upper y))}))
+  (NumericInterval/create {:lower (arithmetic/+ (lower x) (lower y))
+                           :upper (arithmetic/+ (upper x) (upper y))}))
 
 (defmethod arithmetic/* [Interval Interval]
   [x y]
-  (let [p1 (* (:lower x) (:lower y))
-        p2 (* (:lower x) (:upper y))
-        p3 (* (:upper x) (:lower y))
-        p4 (* (:upper x) (:upper y))]
+  (let [p1 (* (lower x) (lower y))
+        p2 (* (lower x) (upper y))
+        p3 (* (upper x) (lower y))
+        p4 (* (upper x) (upper y))]
     (NumericInterval/create {:lower (min p1 p2 p3 p4)
                              :upper (max p1 p2 p3 p4)})))
 

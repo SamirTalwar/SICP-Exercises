@@ -17,7 +17,7 @@
   (width [this]
     (/ (- upper lower) 2))
   (percent [this]
-    (/ (.width this) (.center this))))
+    (/ (width this) (center this))))
 
 (def interval #(NumericInterval/create %))
 
