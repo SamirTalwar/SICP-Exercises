@@ -30,7 +30,7 @@
 
 (defn nth-root [root value]
   (let [iteration (fn [y] (/ value (expt y (dec root))))
-        damp-count (int (/ (Math/log root) (Math/log 2)))]
+        damp-count (int (quot (Math/log root) (Math/log 2)))]
     (if (> damp-count 1)
       (is (thrown-with-msg? Exception #"Infinite recursion"
                             ((fixed-point-builder (average-damp-n (dec damp-count))) iteration 1.0))))
